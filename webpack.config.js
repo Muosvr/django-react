@@ -9,9 +9,5 @@ module.exports = {
         }
       }
     ]
-  },
-  devServer: {
-    contentBase: './static'
-  },
-  entry: './leadmanager/frontend/src/index.js'
+  }
 }
