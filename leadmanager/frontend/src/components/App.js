@@ -7,6 +7,9 @@ import store from '../store';
 import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import Alerts from './layout/Alerts';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import Login from './accounts/Login';
+import Register from './accounts/Register';
 
 const alertOptions = {
   timeout: 3000,
@@ -18,13 +21,19 @@ function App() {
     <Provider store={store}>
       <AlertProvider template={AlertTemplate}
         {...alertOptions}>
-        <Fragment>
-          <Header />
-          <Alerts />
-          <div className="container">
-            <Dashboard />
-          </div>
-        </Fragment>
+        <Router>
+          <Fragment>
+            <Header />
+            <Alerts />
+            <div className="container">
+              <Switch>
+                <Route exact pacth='/' component={Dashboard} />
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
+              </Switch>
+            </div>
+          </Fragment>
+        </Router>
       </AlertProvider>
     </Provider>
   )
