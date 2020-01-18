@@ -7,7 +7,8 @@ import { logout } from '../../actions/auth';
 class Header extends Component {
 
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired,
   }
 
   render() {
@@ -15,7 +16,9 @@ class Header extends Component {
     const authLinks = (
       <ul className="navbar-nav mr-auto">
         <button
-          className="nav-Link btn btn-info btn-sm text-light">Logout
+          className="nav-Link btn btn-info btn-sm text-light"
+          onClick={this.props.logout}
+        >Logout
         </button>
       </ul>
     )
@@ -55,4 +58,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, { logout })(Header)
