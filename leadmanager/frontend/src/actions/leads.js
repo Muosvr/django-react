@@ -2,8 +2,23 @@ import axios from 'axios';
 import { GET_LEADS, DELETE_LEAD, ADD_LEAD, GET_ERRORS, CREATE_MESSAGES } from './types';
 import { createMessage, returnErrors } from './messages';
 
-export const getLeads = () => dispatch => {
-  axios.get('/api/leads')
+export const getLeads = () => (dispatch, getState) => {
+  var token = getState().auth.token;
+  if (!token) {
+    token = localStorage.getItem('token')
+  }
+  console.log('token from getLeads', token)
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  if (token) {
+    config.headers['Authorization'] = `Token ${token}`;
+  }
+
+  axios.get('/api/leads', config)
     .then(res => {
       dispatch({
         type: GET_LEADS,

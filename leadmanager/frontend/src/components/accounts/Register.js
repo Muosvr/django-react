@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 export default class Register extends Component {
   state = {
     username: '',
-    emai: '',
+    email: '',
     password: '',
     password2: '',
   }
@@ -47,7 +47,7 @@ export default class Register extends Component {
               <div key='password' className="form-group">
                 <label>Password</label>
                 <input
-                  type="text"
+                  type="password"
                   className='form-control'
                   name='password'
                   onChange={this.onChange}
@@ -57,7 +57,7 @@ export default class Register extends Component {
               <div key='password2' className="form-group">
                 <label>Password 2</label>
                 <input
-                  type="text"
+                  type="password"
                   className='form-control'
                   name='password2'
                   onChange={this.onChange}
@@ -65,7 +65,7 @@ export default class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <buton className="btn btn-primary">Register</buton>
+                <button className="btn btn-primary">Register</button>
               </div>
               <p>
                 Already have an account? <Link to='/login'>Login</Link>

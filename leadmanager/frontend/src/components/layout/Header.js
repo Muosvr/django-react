@@ -1,8 +1,38 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/auth';
 
-export default class Header extends Component {
+class Header extends Component {
+
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  }
+
   render() {
+    const { isAuthenticated } = this.props.auth
+    const authLinks = (
+      <ul className="navbar-nav mr-auto">
+        <button
+          className="nav-Link btn btn-info btn-sm text-light">Logout
+        </button>
+      </ul>
+    )
+    const guestLinks = (
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item">
+          <Link to='/register' className='nav-link'>
+            Register
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to='/login' className='nav-link'>
+            Login
+          </Link>
+        </li>
+      </ul>
+    )
     return (
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
         <div className="container">
@@ -12,18 +42,7 @@ export default class Header extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link to='/register' className='nav-link'>
-                  Register
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to='/login' className='nav-link'>
-                  Login
-                </Link>
-              </li>
-            </ul>
+            {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>
 
@@ -31,3 +50,9 @@ export default class Header extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(Header)
