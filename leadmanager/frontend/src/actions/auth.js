@@ -6,7 +6,9 @@ import {
   AUTH_ERROR,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
 } from './types';
 
 export const tokenConfig = (getState) => {
@@ -78,6 +80,7 @@ export const register = ({ username, email, password }) => (dispatch) => {
       })
     })
     .catch(err => {
+      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status))
       dispatch({ type: REGISTER_FAIL })
     })
